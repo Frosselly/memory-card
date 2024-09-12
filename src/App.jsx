@@ -30,16 +30,21 @@ function App() {
     setCurrScore(0);
     setClickedCards([]);
 
-    const cardsCopy = cards.slice().sort(() => 0.5 - Math.random());
-    setCards(cardsCopy);
+    // const cardsCopy = cards.slice().sort(() => 0.5 - Math.random());
+    // setCards(cardsCopy);
+    cacheNewCards(Math.floor(Math.random() * 6));
   }
 
-  useEffect(() => {
-    getCardData(eldenRingAPI).then((data) => {
+  function cacheNewCards(page){
+    getCardData(eldenRingAPI + "&page=" + page).then((data) => {
       const formattedData = getData(data);
       setCards(formattedData);
       //console.log("data", formattedData);
     });
+  }
+
+  useEffect(() => {
+    cacheNewCards();
   }, []);
 
   return (
