@@ -1,16 +1,21 @@
-export default function CardHolder({ data }) {
+export default function CardHolder({ data, handleCardClick }) {
   return (
-    <div>
+    <div className="cardHolder">
       {data.map((cardData) => (
-        <Card key={cardData.id} img={cardData.img} text={cardData.name} />
+        <Card
+          handleClick={() => handleCardClick(cardData)}
+          key={cardData.id}
+          img={cardData.img}
+          text={cardData.name}
+        />
       ))}
     </div>
   );
 }
 
-function Card({ img, text }) {
+function Card({ img, text, handleClick }) {
   return (
-    <div>
+    <div onClick={handleClick} className="card">
       <img src={img} />
       <div>
         <p>{text}</p>
